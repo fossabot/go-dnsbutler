@@ -46,7 +46,7 @@ nano dnsbutler.json
     "listenAddr": ":5000",
     "targets": [
         "https://dynamicdns.park-your-domain.com/update?host=@&domain=example.org&password=mysecret&ip=%s",
-        "https://dynamicdns.park-your-domain.com/update?host=*&domain=example.org&password=secrect&ip=%s"
+        "https://dnsentry.example.org:secret@example.org/update?hostname=build.example.org&myip=%s"
     ]
 }
 
