@@ -1,0 +1,28 @@
+[Unit]
+Description=DNSButler
+ConditionPathExists=/home/dnsbutler/
+After=network.target
+ 
+[Service]
+Type=simple
+User=dnsbutler
+Group=dnsbutler
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+
+WorkingDirectory=/home/dnsbutler/
+ExecStart=/home/dnsbutler/dnsbutler
+
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/dnsbutler
+ExecStartPre=/bin/chown root:adm /var/log/dnsbutler
+ExecStartPre=/bin/chmod 755 /var/log/dnsbutler
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=dnsbutler
+ 
+[Install]
+WantedBy=multi-user.target
