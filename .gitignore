@@ -1,4 +1,5 @@
 dnsbutler.json
+dist
 
 # Created by https://www.gitignore.io/api/go,macos,linux,windows,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=go,macos,linux,windows,visualstudiocode

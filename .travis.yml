@@ -1,0 +1,39 @@
+language: go
+sudo: false
+matrix:
+  include:
+  - go: 1.x
+    env:
+    - LATEST=true
+    - GO111MODULE=on
+  - go: tip
+  allow_failures:
+  - go: tip
+
+before_install:
+  - sudo apt-get install -y upx
+
+install:
+- # skip
+
+env:
+  matrix:
+  - GO111MODULE=on
+
+script:
+- go mod download
+- diff -u <(echo -n) <(gofmt -d .)
+- go vet ./...
+- go version && go run ./task/build.go
+
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: "jnicCZN4imqJkzcalxaS9VbWYJIeegw+29VMHXLT3ZyaKVj8N01+5x9TWkPeJN84my0rSLm1BJzGD3pGA48rAYbzFb0NglY44RLJdl+mpf6PnKuYjpNc9SRQMskTyFyY5CGKftl7bPpQO4harRgpJwRmB0dRrkKbIguCFmMhLcR8NXX/gyGNGPNWLR1bFCeQXQSLLse7Dc5wiUufjcUBgl7hasrCqJ3XUxult57X8FeC7ElmDLBVrtUDCOcyabKZLIXWnS7R6mhh1Y68KsQ//XJHH6Kzb/Y5HtVl7RgbGkYHwcn56muOv1gSmVPOPJrWYdiK92jExyBIVBKCeaPybx97iUjztKsx2dW9ZN+CfWKUOGyKMmKjuQSo4cwXb11HkWtf9Pc9CR2ReP4JCEJtHgP35jaqIiMteMijdjKjFb4VmF3QDnljrfmSPLpFbVjd/09VPaIqNjlyPRRGIeE/YHp0BYlDjnkxBSqC9RL/tq9V2ezfSdlSbGqd7+mF2Ect2cxj/8MA+P9N4jJRvwxjko6Z7SD8DK8+YihbNb7q2WuiRRfXnQQJkVujHnJQfD0sjC4CamjSbiuqKsT1EWy/Yxy951kjjfhsLVi65tKD57qz2k42BNfJT8q9aHu3CrdtG0XrBM7mQSLJYNfGq5JQsaW6hIK89SpwXtxgmS/CH6A="
+  file_glob: true
+  file: dist/*
+  on:
+    repo: stahlstift/go-dnsbutler
+    tags: true
+    condition: "$LATEST = true"

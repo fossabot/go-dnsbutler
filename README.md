@@ -25,9 +25,7 @@ cd /home/dnsbutler
 # Switch to user dnsbutler
 sudo su dnsbutler
 
-wget ...
-
-tar xvfz dnsbutler-arm5-0.1.0.tar.gz
+wget dnsbutler-arm6-linux
 
 chmod +x dnsbutler
 
@@ -59,7 +57,7 @@ sudo ufw allow from 192.168.178.1 to any port 5000 proto tcp
 
 cd ~
 
-wget url-toservice from github
+wget https://raw.githubusercontent.com/stahlstift/go-dnsbutler/master/scripts/systemd/dnsbutler.service
 
 sudo mv dnsbutler.service /etc/systemd/system/
 sudo chmod 755 /etc/systemd/system/dnsbutler.service
@@ -78,9 +76,3 @@ http://ipforyourserver:5000/?ip=<ipaddr>
 ```
 
 The domain, username and password fields are ignored and can be filled with random strings.
-
-### Todo
-
-* add binaries
-* add automatically releases per travis
-* update readme with correct path for service and release
