@@ -6,7 +6,7 @@ This tool will update multiple DynDns provider at once.
 
 ## Why
 
-Some providers like Strato doesn't allow wildcard subdomains for a DynDNS and some routers just allows one endpoint to update a DynDNS service. So it's not possible to use different endpoints with a reverse proxy on subdomains like (jenkins.example.org, gitea.example.org, ...)
+Some providers like Strato doesn't allow wildcard subdomains for a DynDNS and some routers just allowing one endpoint to update a DynDNS service. So it's not possible to use different endpoints with a reverse proxy on subdomains like jenkins.example.org, gitea.example.org, ...
 
 There are workarounds for such a case like bash scripts but I want a simple, stable and easy solution running on one of my pis.
 
