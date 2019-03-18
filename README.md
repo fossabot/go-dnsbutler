@@ -26,9 +26,9 @@ cd /home/dnsbutler
 
 # Switch to user dnsbutler
 sudo su dnsbutler
-
+l
 wget https://github.com/stahlstift/go-dnsbutler/releases/download/v0.1.0/dnsbutler-arm6-linux
-
+mv dnsbutler-arm6-linux dnsbutler
 chmod +x dnsbutler
 
 # First start to test if everything is working
