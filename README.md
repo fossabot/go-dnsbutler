@@ -2,7 +2,7 @@
 
 This tool will update multiple DynDns provider at once.
 
-[![Build Status](https://travis-ci.org/stahlstift/go-timetracker.svg?branch=master)](https://travis-ci.org/stahlstift/go-timetracker) [![Go Report Card](https://goreportcard.com/badge/github.com/stahlstift/go-dnsbutler)](https://goreportcard.com/report/github.com/stahlstift/go-dnsbutler)
+[![Build Status](https://travis-ci.org/stahlstift/go-dnsbutler.svg?branch=master)](https://travis-ci.org/stahlstift/go-dnsbutler) [![Go Report Card](https://goreportcard.com/badge/github.com/stahlstift/go-dnsbutler)](https://goreportcard.com/report/github.com/stahlstift/go-dnsbutler)
 
 ## Why
 
