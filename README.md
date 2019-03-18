@@ -1,4 +1,4 @@
-# go-DNSButler
+# go-dnsbutler
 
 This tool will update multiple DynDns provider at once.
 
