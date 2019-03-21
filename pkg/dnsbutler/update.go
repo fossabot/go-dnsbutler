@@ -5,16 +5,16 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"sync"
 )
 
 type response struct {
-	Err        error
 	URL        string
 	StatusCode int
 	Body       []byte
 }
 
-func updateTarget(urls, ip string, ch chan<- *response) {
+func updateTarget(urls, ip string) (*response, error) {
 	response := &response{
 		URL: "",
 	}
@@ -31,43 +31,43 @@ func updateTarget(urls, ip string, ch chan<- *response) {
 
 	resp, err := http.Get(urls)
 	if err != nil {
-		response.Err = err
-		ch <- response
-		return
+		return response, err
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		response.Err = err
-		ch <- response
-		return
+		return response, err
 	}
 
 	response.Body = body
 	response.StatusCode = resp.StatusCode
 
-	ch <- response
+	return response, nil
 }
 
-func updateTargets(targets []string, newIP string, logger *log.Logger) {
-	ch := make(chan *response)
-
+func updateTargets(targets []string, newIP string, logger *log.Logger, done chan<- bool) {
+	var waitGroup sync.WaitGroup
 	for _, t := range targets {
-		go updateTarget(t, newIP, ch)
+		waitGroup.Add(1)
+
+		go func(t string) {
+			defer waitGroup.Done()
+
+			r, err := updateTarget(t, newIP)
+			if err != nil {
+				log.Printf("Received err '%v' for url '%s'", err, r.URL)
+				return
+			}
+			if r.StatusCode != http.StatusOK {
+				log.Printf("Received StatusCode '%d' for url '%s'", r.StatusCode, r.URL)
+				return
+			}
+
+			log.Printf("IP for url '%s' updated", r.URL)
+		}(t)
 	}
 
-	for range targets {
-		r := <-ch
-		if r.Err != nil {
-			log.Printf("Received err '%v' for url '%s'", r.Err, r.URL)
-			return
-		}
+	waitGroup.Wait()
 
-		if r.StatusCode != http.StatusOK {
-			log.Printf("Received StatusCode '%d' for url '%s'", r.StatusCode, r.URL)
-			return
-		}
-
-		log.Printf("IP for url '%s' updated", r.URL)
-	}
+	done <- true
 }

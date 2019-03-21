@@ -10,11 +10,13 @@ import (
 
 func ipHandler(configPath string, logger *log.Logger) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Content-Type", "text/plain")
+
 		qry := r.URL.Query()
 		ip := qry.Get("ip")
 		if ip == "" {
 			w.WriteHeader(http.StatusBadRequest)
-			fmt.Fprintln(w, "query param 'ip' is missing")
+			fmt.Fprintln(w, "failed\n\nquery param 'ip' is missing")
 			return
 		}
 
@@ -27,16 +29,19 @@ func ipHandler(configPath string, logger *log.Logger) func(w http.ResponseWriter
 		c, err := readConfig(configPath)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-			fmt.Fprintf(w, "Internal Server Error")
+			fmt.Fprintf(w, "failed\n\nInternal Server Error")
 			return
 		}
 
 		logger.Println("iphandler called - will update now")
 
-		updateTargets(c.Targets, ip, logger)
+		done := make(chan bool)
+		defer close(done)
+		go updateTargets(c.Targets, ip, logger, done)
+		<-done
 
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, "ok.")
+		fmt.Fprintln(w, "ok")
 	}
 }
 
@@ -56,7 +61,10 @@ func Start(configPath string) error {
 		}
 
 		if ip != "" {
-			updateTargets(c.Targets, ip, logger)
+			done := make(chan bool)
+			updateTargets(c.Targets, ip, logger, done)
+			<-done
+			close(done)
 		}
 	}
 
