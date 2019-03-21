@@ -1,8 +1,10 @@
+[![Build Status](https://travis-ci.org/stahlstift/go-dnsbutler.svg?branch=master)](https://travis-ci.org/stahlstift/go-dnsbutler) [![Go Report Card](https://goreportcard.com/badge/github.com/stahlstift/go-dnsbutler)](https://goreportcard.com/report/github.com/stahlstift/go-dnsbutler)
+
 # go-dnsbutler
 
-This tool will update multiple DynDns provider at once.
+![logo](https://raw.githubusercontent.com/stahlstift/go-dnsbutler/master/_assets/butler.png)
 
-[![Build Status](https://travis-ci.org/stahlstift/go-dnsbutler.svg?branch=master)](https://travis-ci.org/stahlstift/go-dnsbutler) [![Go Report Card](https://goreportcard.com/badge/github.com/stahlstift/go-dnsbutler)](https://goreportcard.com/report/github.com/stahlstift/go-dnsbutler)
+This tool will update multiple DynDns provider at once.
 
 ## Why
 
