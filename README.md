@@ -1,12 +1,12 @@
-# go-DNSButler
+# go-dnsbutler
 
 This tool will update multiple DynDns provider at once.
 
-[![Build Status](https://travis-ci.org/stahlstift/go-timetracker.svg?branch=master)](https://travis-ci.org/stahlstift/go-timetracker) [![Go Report Card](https://goreportcard.com/badge/github.com/stahlstift/go-dnsbutler)](https://goreportcard.com/report/github.com/stahlstift/go-dnsbutler)
+[![Build Status](https://travis-ci.org/stahlstift/go-dnsbutler.svg?branch=master)](https://travis-ci.org/stahlstift/go-dnsbutler) [![Go Report Card](https://goreportcard.com/badge/github.com/stahlstift/go-dnsbutler)](https://goreportcard.com/report/github.com/stahlstift/go-dnsbutler)
 
 ## Why
 
-Some providers like Strato doesn't allow wildcard subdomains for a DynDNS and some routers just allows one endpoint to update a DynDNS service. So it's not possible to use different endpoints with a reverse proxy on subdomains like (jenkins.example.org, gitea.example.org, ...)
+Some providers like Strato doesn't allow wildcard subdomains for a DynDNS and some routers just allowing one endpoint to update a DynDNS service. So it's not possible to use different endpoints with a reverse proxy on subdomains like jenkins.example.org, gitea.example.org, ...
 
 There are workarounds for such a case like bash scripts but I want a simple, stable and easy solution running on one of my pis.
 
@@ -26,9 +26,9 @@ cd /home/dnsbutler
 
 # Switch to user dnsbutler
 sudo su dnsbutler
-
-wget dnsbutler-arm6-linux
-
+l
+wget https://github.com/stahlstift/go-dnsbutler/releases/download/v0.1.0/dnsbutler-arm6-linux
+mv dnsbutler-arm6-linux dnsbutler
 chmod +x dnsbutler
 
 # First start to test if everything is working
