@@ -8,6 +8,7 @@ import (
 )
 
 type Config struct {
+	Wait       int      `json:"waitInSec"`
 	Provider   string   `json:"ipProvider"`
 	ListenAddr string   `json:"listenAddr"`
 	Targets    []string `json:"targets"`
@@ -15,6 +16,7 @@ type Config struct {
 
 func initConfig(configPath string) (*Config, error) {
 	config := &Config{
+		Wait:       5,
 		Provider:   "https://api.ipify.org/",
 		ListenAddr: ":5000",
 		Targets:    make([]string, 0),

@@ -33,10 +33,15 @@ func ipHandler(configPath string, logger *log.Logger) func(w http.ResponseWriter
 			return
 		}
 
-		logger.Println("iphandler called - will update now")
-
 		done := make(chan bool)
 		defer close(done)
+		if c.Wait > 0 {
+			logger.Printf("iphandler called - will wait %d seconds before update\n", c.Wait)
+			timer := time.NewTimer(time.Duration(c.Wait) * time.Second)
+			<-timer.C
+		} else {
+			logger.Println("iphandler called - will update now")
+		}
 		go updateTargets(c.Targets, ip, logger, done)
 		<-done
 
