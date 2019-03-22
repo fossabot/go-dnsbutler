@@ -62,7 +62,7 @@ func Start(configPath string) error {
 
 		if ip != "" {
 			done := make(chan bool)
-			updateTargets(c.Targets, ip, logger, done)
+			go updateTargets(c.Targets, ip, logger, done)
 			<-done
 			close(done)
 		}
