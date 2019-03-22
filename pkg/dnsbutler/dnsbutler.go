@@ -33,6 +33,13 @@ func ipHandler(configPath string, logger *log.Logger) func(w http.ResponseWriter
 			return
 		}
 
+		qrySecret := qry.Get("secret")
+		if c.Secret != "" && qrySecret != c.Secret {
+			w.WriteHeader(http.StatusUnauthorized)
+			fmt.Fprintf(w, "failed\n\nWrong secret")
+			return
+		}
+
 		done := make(chan bool)
 		defer close(done)
 		if c.Wait > 0 {

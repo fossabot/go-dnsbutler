@@ -11,6 +11,7 @@ type Config struct {
 	Wait       int      `json:"waitInSec"`
 	Provider   string   `json:"ipProvider"`
 	ListenAddr string   `json:"listenAddr"`
+	Secret     string   `json:"secret"`
 	Targets    []string `json:"targets"`
 }
 

@@ -46,6 +46,7 @@ nano dnsbutler.json
 {
     "ipProvider": "https://api.ipify.org/",
     "listenAddr": ":5000",
+    #optional "secret": "your secret",
     "targets": [
         "https://dynamicdns.park-your-domain.com/update?host=@&domain=example.org&password=mysecret&ip=%s",
         "https://dnsentry.example.org:secret@example.org/update?hostname=build.example.org&myip=%s"
@@ -76,7 +77,7 @@ sudo service dnsbutler status
 The url for the FritzBox will look like
 
 ```bash
-http://ipforyourserver:5000/?ip=<ipaddr>
+http://ipforyourserver:5000/?ip=<ipaddr> #optional &secret=YOUR_SECRET
 ```
 
 The domain, username and password fields are ignored and can be filled with random strings.
