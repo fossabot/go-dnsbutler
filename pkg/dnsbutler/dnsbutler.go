@@ -83,14 +83,16 @@ func Start(configPath string) error {
 	router := http.NewServeMux()
 	router.HandleFunc("/", ipHandler(configPath, logger))
 
+	timeout := time.Duration(30 + c.Wait)
+
 	server := &http.Server{
 		Addr:              c.ListenAddr,
 		Handler:           router,
 		ErrorLog:          logger,
-		ReadTimeout:       5 * time.Second,
-		ReadHeaderTimeout: 5 * time.Second,
-		WriteTimeout:      5 * time.Second,
-		IdleTimeout:       5 * time.Second,
+		ReadTimeout:       timeout * time.Second,
+		ReadHeaderTimeout: timeout * time.Second,
+		WriteTimeout:      timeout * time.Second,
+		IdleTimeout:       timeout * time.Second,
 	}
 
 	logger.Println("DNSButler is ready to serve at", c.ListenAddr)
