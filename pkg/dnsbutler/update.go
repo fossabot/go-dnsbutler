@@ -1,6 +1,7 @@
 package dnsbutler
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -18,6 +19,8 @@ func updateTarget(urls, ip string) (*response, error) {
 	response := &response{
 		URL: "",
 	}
+
+	urls = fmt.Sprintf(urls, ip)
 
 	u, _ := url.Parse(urls)
 	if u != nil {
