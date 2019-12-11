@@ -3,6 +3,7 @@
 # go-dnsbutler
 
 ![logo](https://raw.githubusercontent.com/stahlstift/go-dnsbutler/master/_assets/butler.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdemaggus83%2Fgo-dnsbutler.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdemaggus83%2Fgo-dnsbutler?ref=badge_shield)
 
 A tool to update multiple DynDNS providers at once.
 
@@ -134,3 +135,7 @@ Initial release
 #
 
 Made with 🍺 and ❤️
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fdemaggus83%2Fgo-dnsbutler.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fdemaggus83%2Fgo-dnsbutler?ref=badge_large)
